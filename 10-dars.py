@@ -8,8 +8,10 @@ soup = bs4.BeautifulSoup(res.text, "lxml")
 
 image_src = soup.select('.mw-file-element')
 
-for image in image_src:
-    requests_image = requests.get('https:' + image['src'])
+for id, image in enumerate(image_src[:2], 1):
 
-    with open('brian_chesky.jpg', 'wb') as file:
+    requests_image = requests.get('https:' + image['src'])
+    file_name = f"brian_chesky_{id}.jpg"
+
+    with open('file_name', 'wb') as file:
         file.write(requests_image.content)
